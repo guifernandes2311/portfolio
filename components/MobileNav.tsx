@@ -13,18 +13,24 @@ const MobileNav = () => {
   const onToggleNav = () => {
     setNavShow((status) => {
       if (status) {
-        enableBodyScroll(navRef.current)
+        if (navRef.current) {
+          enableBodyScroll(navRef.current)
+        }
       } else {
-        // Prevent scrolling
-        disableBodyScroll(navRef.current)
+        if (navRef.current) {
+          disableBodyScroll(navRef.current)
+        }
       }
       return !status
     })
   }
 
   useEffect(() => {
-    return clearAllBodyScrollLocks
-  })
+    return () => {
+      // Limpa todos os locks quando o componente desmonta
+      clearAllBodyScrollLocks()
+    }
+  }, [])
 
   return (
     <>
