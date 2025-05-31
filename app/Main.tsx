@@ -134,12 +134,9 @@ function useLenisScroll() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      smooth: true,
       lerp: 0.1,
       duration: 1.2, // Duração do scroll suave
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing suave
-      direction: 'vertical',
-      gestureDirection: 'vertical',
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing suav
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
@@ -300,12 +297,7 @@ export default function Home() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
+                  <path strokeLinecap="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </div>
             </div>
@@ -365,10 +357,10 @@ export default function Home() {
                           src={project.imgSrc}
                           alt={project.title}
                           className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          onError={(e) => {
-                            e.target.style.display = 'none'
-                            e.target.nextSibling.style.display = 'flex'
-                          }}
+                          // onError={(e) => {
+                          //   e.target.style.display = 'none'
+                          //   e.target.nextSibling.style.display = 'flex'
+                          // }}
                         />
                       ) : null}
                       {/* Placeholder caso não tenha imagem */}
