@@ -2,17 +2,23 @@
 
 import ThemeSwitch from '@/components/ThemeSwitch'
 import { useState, useEffect, useRef } from 'react'
-import { Authors, allAuthors } from 'contentlayer/generated'
+import { Authors, allAuthors, Blog } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import AuthorLayout from '@/layouts/AuthorLayout'
-import { coreContent } from 'pliny/utils/contentlayer'
+import { coreContent, CoreContent } from 'pliny/utils/contentlayer'
 import styled from 'styled-components'
 import Link from '@/components/Link'
 import { FaReact, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import { SiTypescript } from 'react-icons/si'
 import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
+import Image from 'next/image'
 import Lenis from '@studio-freight/lenis'
+
+// Interface para as props do componente
+interface MainProps {
+  posts: CoreContent<Blog>[]
+}
 
 const StyledButtonWrapper = styled.div`
   display: flex;
@@ -160,7 +166,7 @@ function useLenisScroll() {
   return lenisRef
 }
 
-export default function Home() {
+export default function Main({ posts }: MainProps) {
   const lenisRef = useLenisScroll()
   const author = allAuthors.find((p) => p.slug === 'default') as Authors
   const mainContent = coreContent(author)
@@ -353,14 +359,12 @@ export default function Home() {
                   <div className="lg:w-1/2">
                     <div className="relative overflow-hidden rounded-lg bg-gray-800">
                       {project.imgSrc ? (
-                        <img
+                        <Image
                           src={project.imgSrc}
                           alt={project.title}
+                          width={800}
+                          height={320}
                           className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          // onError={(e) => {
-                          //   e.target.style.display = 'none'
-                          //   e.target.nextSibling.style.display = 'flex'
-                          // }}
                         />
                       ) : null}
                       {/* Placeholder caso não tenha imagem */}
